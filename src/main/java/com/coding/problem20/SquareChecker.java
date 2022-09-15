@@ -27,7 +27,27 @@ package com.coding.problem20;
 public class SquareChecker {
 
     public boolean isValidSquare(Point p1, Point p2, Point p3, Point p4) {
+        double distance14 = getDistance(p1, p4);
+        double distance12 = getDistance(p1, p2);
+        double distance13 = getDistance(p1, p3);
+
+        if (distance12 == 0 && distance13 == 0 && distance14 == 0) {
+            return false;
+        }
+        if ((distance14 == getRootSquare(distance12, distance13) && distance12 == distance13) ||
+                (distance12 == getRootSquare(distance14, distance13) && distance14 == distance13) ||
+                (distance13 == getRootSquare(distance12, distance14) && distance12 == distance14)) {
+            return true;
+        }
         return false;
+    }
+
+    public double getRootSquare(double d1, double d2) {
+        return Math.sqrt(Math.pow(d1, 2) + Math.pow(d2, 2));
+    }
+
+    public double getDistance(Point point1, Point point2) {
+        return Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
     }
 
 }

@@ -26,7 +26,6 @@ package com.coding.problem3;
 public class IPValidityCheck {
 
     public static boolean isValid(final String email) {
-        return false;
+        return MyRegex.validateIP(email);
     }
-
 }

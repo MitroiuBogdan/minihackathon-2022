@@ -1,5 +1,7 @@
 package com.coding.problem18;
 
+import java.util.Arrays;
+
 /**
  * You are given a sorted array. Find a special number
  * in the array that appears more than a 25% of the time.
@@ -16,7 +18,12 @@ package com.coding.problem18;
 public class FindNumber {
 
     public int findSpecialNumber(int[] arr) {
+        int quarter = arr.length / 4;
+        for (int i = 0; i < arr.length - quarter; i++) {
+            if (arr[i] == arr[i + quarter]) {
+                return arr[i];
+            }
+        }
         return -1;
     }
-
 }

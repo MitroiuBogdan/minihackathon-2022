@@ -14,7 +14,10 @@ package com.coding.problem4;
  */
 public class SolarSystem {
 
-    public static String land() {//Celestial celestial) {
-        return "";
+    public static String land(Celestial celestial) {
+        if (null == celestial) {
+            return "failure";
+        }
+        return celestial.landing();
     }
 }

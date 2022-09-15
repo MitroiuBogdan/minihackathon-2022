@@ -1,6 +1,6 @@
 package com.coding.problem11;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * You are waiting in line at the passport renewal desk and they server everyone in alphabetical order.
@@ -13,7 +13,31 @@ import java.util.List;
  */
 public class PassportOffice {
 
+    public static int processingTime = 10;
+
     public long checkTime(String myName, int availableAgents, List<String> others) {
-        return 0L;
+        List<String> allMembers = new ArrayList(others);
+        allMembers.add(myName);
+        Collections.sort(allMembers);
+
+        List<List<String>> queues = new ArrayList<>();
+        for (int i = 0; i < availableAgents; i++) {
+            queues.add(new ArrayList<>());
+        }
+
+        int queueIndex = 0;
+        int myPosition = 0;
+        for (String name : allMembers) {
+            queues.get(queueIndex).add(name);
+            if (name.equals(myName)) {
+                myPosition = queues.get(queueIndex).size();
+            }
+            queueIndex++;
+            if (queueIndex == availableAgents) {
+                queueIndex = 0;
+            }
+        }
+
+        return myPosition * processingTime;
     }
 }

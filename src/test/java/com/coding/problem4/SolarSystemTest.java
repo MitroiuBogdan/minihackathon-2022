@@ -9,25 +9,25 @@ public class SolarSystemTest {
 
     @Test
     public void problem4_test1() {
-        // Remove comment to run test
-        // assertEquals("Mars", SolarSystem.land(new Mars()));
+//         Remove comment to run test
+         assertEquals("Mars", SolarSystem.land(new Mars()));
     }
 
     @Test
     public void problem4_test2() {
         // Remove comment to run test
-//        assertEquals("Sun", SolarSystem.land(new Sun()));
+        assertEquals("Sun", SolarSystem.land(new Sun()));
     }
 
     @Test
     public void problem4_test3() {
         // Remove comment to run test
-//        assertEquals("Pluto", SolarSystem.land(new Pluto()));
+        assertEquals("Pluto", SolarSystem.land(new Pluto()));
     }
 
     @Test
     public void problem4_test4() {
         // Remove comment to run test
-//        assertEquals("failure", SolarSystem.land(null));
+        assertEquals("failure", SolarSystem.land(null));
     }
 }
