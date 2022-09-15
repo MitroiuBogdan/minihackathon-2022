@@ -16,18 +16,33 @@ package com.coding.problem14;
  */
 public class NetflixRecommendation {
     public int solution(int[] newUserRatings, User[] users) {
-        return -1;
+
+        User minUser = users[0];
+        int min = getSimilarity(minUser.ratings, newUserRatings);
+        for (int i = 0; i < users.length; i++) {
+            if (getSimilarity(users[i].ratings, newUserRatings) < min) {
+                minUser = users[i];
+            }
+        }
+        return minUser.id;
+    }
+
+    public int getSimilarity(int[] rating, int[] newUserRatings) {
+        int similarity = 0;
+        for (int i = 0; i < rating.length; i++) {
+            similarity += Math.abs(rating[i] - newUserRatings[i]);
+        }
+        return similarity;
     }
 }
+    class User {
+        int id;
+        int[] ratings;
 
-class User {
-    int id;
-    int[] ratings;
-
-    User(int id, int[] ratings) {
-        if (ratings.length != 5)
-            throw new IllegalArgumentException("Each user should have exactly 5 category ratings");
-        this.id = id;
-        this.ratings = ratings;
-    }
+        User(int id, int[] ratings) {
+            if (ratings.length != 5)
+                throw new IllegalArgumentException("Each user should have exactly 5 category ratings");
+            this.id = id;
+            this.ratings = ratings;
+        }
 }
