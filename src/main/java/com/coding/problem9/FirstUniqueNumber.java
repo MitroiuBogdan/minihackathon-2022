@@ -1,5 +1,9 @@
 package com.coding.problem9;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * a non-empty array a consisting of N integers is given. The unique number is the number that occurs exactly once in array a.
  * <p>
@@ -50,6 +54,14 @@ package com.coding.problem9;
  */
 public class FirstUniqueNumber {
     public int solution(int[] a) {
-        return -1;
+        Set<Integer> uniques = new LinkedHashSet<>();
+        Set<Integer> duplicates = new HashSet<>();
+        for (int x : a) {
+            if (!uniques.add(x)) {
+                duplicates.add(x);
+            }
+        }
+        uniques.removeAll(duplicates);
+        return uniques.isEmpty() ? -1 : uniques.iterator().next();
     }
 }

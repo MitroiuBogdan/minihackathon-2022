@@ -8,6 +8,10 @@ package com.coding.problem2;
 public class StringPatternMatching {
 
     public int solutionPattern(Object obj) {
-        return -1;
+        if (obj instanceof String) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

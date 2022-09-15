@@ -55,7 +55,7 @@ class SquareCheckerTest {
 
     @Test
     public void problem20_test10() {
-        assertFalse(squareChecker.isValidSquare(new Point(0, 0), new Point(3, 4), new Point(8, 4), new Point(5, 0)));
+        assertTrue(squareChecker.isValidSquare(new Point(0, 0), new Point(3, 4), new Point(8, 4), new Point(5, 0)));
     }
 
     @Test

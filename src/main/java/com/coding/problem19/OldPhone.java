@@ -1,6 +1,6 @@
 package com.coding.problem19;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * You are a detective investigating a crime. You found an old phone (with button, not a smartphone)
@@ -29,7 +29,47 @@ import java.util.List;
  */
 public class OldPhone {
     public List<String> letterCombinations(String digits) {
-        return null;
+        if (digits.isEmpty() || "1".contentEquals(digits) || "0".contentEquals(digits))
+            return Collections.emptyList();
+
+        String[] letterMappings = { "0",   "1",   "abc",  "def", "ghi",
+                "jkl", "mno", "pqrs", "tuv", "wxyz" };
+
+        ArrayList<String> list = letterCombinationsUtil(sanitizeInput(digits), digits.length(), letterMappings);
+        return list;
+
     }
 
+    int[] sanitizeInput(String digits) {
+        String[] split = digits.split("(?!^)");
+        int[] array = new int[split.length];
+        for (int i = 0; i < split.length; i++) {
+            array[i] = Integer.parseInt(split[i]);
+        }
+        return array;
+    }
+
+    static ArrayList<String>
+    letterCombinationsUtil(int[] number, int n, String[] letterMappings)
+    {
+        ArrayList<String> output = new ArrayList<>();
+
+        Queue<String> q = new LinkedList<>();
+        q.add("");
+
+        while (!q.isEmpty()) {
+            String s = q.remove();
+
+            if (s.length() == n)
+                output.add(s);
+            else {
+                String val = letterMappings[number[s.length()]];
+                for (int i = 0; i < val.length(); i++)
+                {
+                    q.add(s + val.charAt(i));
+                }
+            }
+        }
+        return output;
+    }
 }
