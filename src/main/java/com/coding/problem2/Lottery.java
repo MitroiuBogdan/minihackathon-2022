@@ -1,5 +1,6 @@
 package com.coding.problem2;
 
+import java.util.random.RandomGenerator;
 import java.util.stream.IntStream;
 
 /**
@@ -11,7 +12,14 @@ import java.util.stream.IntStream;
  */
 public class Lottery {
 
+    private final String RANDOM_NUMBER_GENERATION_ALGORITHM = "L64X128MixRandom";
+    private final int LOWER_BOUND = 1;
+    private final int UPPER_BOUND = 49;
+    private final int NO_OF_RANDOM_NUMBERS_GENERATED = 6;
+
     public IntStream feelingLucky() {
-        return null;
+        RandomGenerator generator = RandomGenerator.of(RANDOM_NUMBER_GENERATION_ALGORITHM);
+        return generator.ints(NO_OF_RANDOM_NUMBERS_GENERATED, LOWER_BOUND,  UPPER_BOUND);
+
     }
 }

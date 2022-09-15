@@ -21,6 +21,7 @@ package com.coding.problem8;
 public class PowerOfTwo {
 
     public int solution(int n) {
-        return -1;
+        int HIGHEST_POWER_OF_TWO = (n & (-n));
+        return (int)(Math.log(HIGHEST_POWER_OF_TWO) / Math.log(2));
     }
 }

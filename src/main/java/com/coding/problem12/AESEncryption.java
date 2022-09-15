@@ -1,11 +1,16 @@
 package com.coding.problem12;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import javax.crypto.*;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.Base64;
 
 /**
  * How do encryption & decryption work? We're not going into this now :)
@@ -33,16 +38,40 @@ import java.security.NoSuchAlgorithmException;
  */
 public class AESEncryption {
 
+    private static final String ALGORITHM = "AES/CBC/PKCS5PADDING";
     public static String encrypt(String plainText, String secret, String iv)
             throws NoSuchAlgorithmException, NoSuchPaddingException,
             IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
-        return "";
+
+        byte[] initVector = Base64.getDecoder().decode(iv);
+        byte[] decodedKey = Base64.getDecoder().decode(secret);
+
+            IvParameterSpec ivt = new IvParameterSpec(initVector);
+            SecretKeySpec keySpec = new SecretKeySpec(decodedKey, "AES");
+
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
+            cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivt);
+
+            byte[] encrypted = cipher.doFinal(plainText.getBytes());
+            return Base64.getEncoder().encodeToString(encrypted);
+
     }
 
     public static String decrypt(String cipherText, String secret, String iv)
             throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
             IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
-        return "";
+
+        byte[] initVector = Base64.getDecoder().decode(iv);
+        byte[] decodedKey = Base64.getDecoder().decode(secret);
+
+        IvParameterSpec ivt = new IvParameterSpec(initVector);
+        SecretKeySpec keySpec = new SecretKeySpec(decodedKey, "AES");
+
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.DECRYPT_MODE, keySpec, ivt);
+        byte[] original = cipher.doFinal(Base64.getDecoder().decode(cipherText));
+
+        return new String(original);
     }
 
 }
